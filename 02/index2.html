@@ -1,54 +1,97 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <title>PHYSCI 70: Intro to Digital Fabrication </title>
-  <meta charset="utf-8">
-  <link href="./style.css" rel="stylesheet">
-</head>
-<body>
+<html>
+<title>Mohammed Mutaher - PHYSCI 70</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
+</style>
+<body class="w3-pale-yellow w3-content" style="max-width:1600px">
 
+<!-- Sidebar/menu -->
+<nav class="w3-sidebar w3-collapse w3-white w3-animate-left" style="z-index:3;width:225px;" id="mySidebar"><br>
+  <div class="w3-container">
+    <a href="#" onclick="w3_close()" class="w3-hide-large w3-right w3-jumbo w3-padding w3-hover-grey" title="close menu">
+      <i class="fa fa-remove"></i>
+    </a>
+    <img src="./Pfp.png" 
+      style="object-fit:cover;
+        object-position: center;
+            width:62px;
+            height:62px"
+      class="w3-round"><br><br>
+    <h4><b>Navigation</b></h4>
+  </div>
+  <div class="w3-bar-block">
+    <a href="https://mohammed-mutaher.github.io/PHYSCI-70/" onclick="w3_close()" class="w3-bar-item w3-button w3-padding w3-text-teal"><i class="fa fa-th-large fa-fw w3-margin-right"></i>Home</a> 
+    <a href="./about.html" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-user fa-fw w3-margin-right"></i>About Me</a>
+    <a href="https://nathanmelenbrink.github.io/ps70/" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-gears fa-fw w3-margin-right"></i>About PHYSCI 70</a>
+  </div>
+</nav>
 
-<xmp theme="journal" style="display:none;">
+<!-- Overlay effect when opening sidebar on small screens -->
+<div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
 
-<div class="container-fluid">
+<!-- !PAGE CONTENT! -->
+<div class="w3-main" style="margin-left:250px">
 
-  ### Week 2
+<!-- Header -->
+  <header id="Week 2">
+    <a href="#"><img src="/w3images/avatar_g2.jpg" style="width:65px;" class="w3-circle w3-right w3-margin w3-hide-large w3-hover-opacity"></a>
+    <span class="w3-button w3-hide-large w3-xxlarge w3-hover-text-grey" onclick="w3_open()"><i class="fa fa-bars"></i></span>
+    <div class="w3-container">
+    <div class="w3-section w3-padding-10">
+    <h1><b>Week 2: 2D Design & Cutting</b></h1>
+    <div class="w3-section w3-bottombar w3-border-white w3-padding-10"> </div>
+    </div>
+  </header>
 
-  <p> This week, we focused on 2D Design & Cutting. </p>
+<!-- Body -->
+<div class="w3-margin-left">
+  <body id="Text">
+    <div class="w3-container">
+    <div class="w3-section w3-padding-10">
+
+      <p> This week, we focused on 2D Design & Cutting. </p>
   
-  <p> We were instructed to create a press-fit construction kit that could be assembled in multiple ways. To do so, we needed to sketch shapes in Fusion 360 and also account for lasercutter kerf. For my project, I decided to make a model of my hand. It can be assembled in multiple ways because of "joints" that allow one to change the orientation of individual digit segments. I found the kerf by laser cutting interlocking pieces with known dimensions. These pieces did not fit snugly because of the kerf (this was the expected result). I used calipers to measure the distance between the two "walls" of the receiving piece. The distance in the sketch was 10mm, but I measured 10.50mm with the calipers. So, I changed the distance on the other piece to 10.50mm, laser cut it, and tested to see if it fit snugly into the receiving piece now. Sure enough, it did! So, I knew the kerf was 0.25mm. </p>
+      <p> We were instructed to create a press-fit construction kit that could be assembled in multiple ways. To do so, we needed to sketch shapes in Fusion 360 and also account for lasercutter kerf. For my project, I decided to make a model of my hand. It can be assembled in multiple ways because of "joints" that allow one to change the orientation of individual digit segments. I found the kerf by laser cutting interlocking pieces with known dimensions. These pieces did not fit snugly because of the kerf (this was the expected result). I used calipers to measure the distance between the two "walls" of the receiving piece. The distance in the sketch was 10mm, but I measured 10.50mm with the calipers. So, I changed the distance on the other piece to 10.50mm, laser cut it, and tested to see if it fit snugly into the receiving piece now. Sure enough, it did! So, I knew the kerf was 0.25mm. </p>
 
-  <p> These were the pieces I used to find the kerf: 
+      <p> These were the pieces I used to find the kerf:</p> 
 
-  <img src="./Test.png" width="50%" alt="" class="center"> 
+      <img src="./Test.png" width="50%" alt="" class="center"> 
 
-  <p> I accounted for terf in my design by setting two parameters, the average thickness of the material (cardboard) being laser cut and the kerf (4.42mm and 0.25mm, respectively). For every notch in my design, the distance from the centerline to the wall of the piece was equal to (Thickness-Kerf)/2. In other words, each notch was 4.17mm wide. </p>
+      <p> I accounted for terf in my design by setting two parameters, the average thickness of the material (cardboard) being laser cut and the kerf (4.42mm and 0.25mm, respectively). For every notch in my design, the distance from the centerline to the wall of the piece was equal to (Thickness-Kerf)/2. In other words, each notch was 4.17mm wide. </p>
 
-  <p> This is what my final design looked like in Fusion 360: 
-  <img src="./Hand_design.png" width="50%" alt="" class="center">
+      <p> This is what my final design looked like in Fusion 360: 
+      
+      <img src="./Hand_design.png" width="50%" alt="" class="center">
 
-  <p> I was really happy with how my project came out! I also added a base later on. This is what my finished project looks like: </p>
+      <p> I was really happy with how my project came out! I also added a base later on. This is what my finished project looks like: </p>
 
-  <img src="./Hand1.jpg" width="50%" alt="" class="center">
-  <img src="./Hand2.jpg" width="50%" alt="" class="center">
+      <img src="./Hand1.jpg" width="50%" alt="" class="center">
+      <img src="./Hand2.jpg" width="50%" alt="" class="center">
 
- <p>I also worked through a Fusion 360 tutorial, and watched all the videos in the "Fusion 360 Tutorial for Beginners" playlist by CAD CAM Tutorials on YouTube. I found these tutorials really helpful and it would have saved me a lot of time had I watched them before starting the 2D design project described above. In addition to 2D design, the tutorial covered 3D design in Fusion 360 extensively. I learned how to extrude 2D shapes and how to navigate the 3D workspace, including new functions such as shell, which I used when working on the third assignment for this week. I think I have a much better understanding of Fusion 360 and feel confident using the program, even though I sometimes make mistakes or get stuck. I am sure I will get better with practice, but there is still a lot that I do not know how to do, for example how to properly use the functions in the "Construct" tab. </p>
+      <p>I also worked through a Fusion 360 tutorial, and watched all the videos in the "Fusion 360 Tutorial for Beginners" playlist by CAD CAM Tutorials on YouTube. I found these tutorials really helpful and it would have saved me a lot of time had I watched them before starting the 2D design project described above. In addition to 2D design, the tutorial covered 3D design in Fusion 360 extensively. I learned how to extrude 2D shapes and how to navigate the 3D workspace, including new functions such as shell, which I used when working on the third assignment for this week. I think I have a much better understanding of Fusion 360 and feel confident using the program, even though I sometimes make mistakes or get stuck. I am sure I will get better with practice, but there is still a lot that I do not know how to do, for example how to properly use the functions in the "Construct" tab. </p>
 
-  <p> The last assignment for this week was to select at least 2 household objects or components from the lab, measure them using calipers, and model them in Fusion 360 (or other program). I chose to model a roll of tape and a tape dispenser. After measuring the objects, I designed a 2-D sketch that I extruded. I then made modifications to the 3D models, for example hollowing out the inside of the tape dispenser (using the shell tool was really tricky given the shape), and made an assembly by placing the roll of tape into the tape dispenser. I also colored the tape so that it can be differentiated from the dispenser. Here are some screenshots I took while working on this project: </p>
+      <p> The last assignment for this week was to select at least 2 household objects or components from the lab, measure them using calipers, and model them in Fusion 360 (or other program). I chose to model a roll of tape and a tape dispenser. After measuring the objects, I designed a 2-D sketch that I extruded. I then made modifications to the 3D models, for example hollowing out the inside of the tape dispenser (using the shell tool was really tricky given the shape), and made an assembly by placing the roll of tape into the tape dispenser. I also colored the tape so that it can be differentiated from the dispenser. Here are some screenshots I took while working on this project: </p>
 
-  <img src="./tape_dim.png" width="50%" alt="" class="center">
-  <img src="./tapedispenserfinal.png" width="50%" alt="" class="center">
-  <img src="./tapefinal.png" width="50%" alt="" class="center">
-  <img src="./Finaltapedispenser.png" width="50%" alt="" class="center">
+      <img src="./tape_dim.png" width="50%" alt="" class="center">
+      <img src="./tapedispenserfinal.png" width="50%" alt="" class="center">
+      <img src="./tapefinal.png" width="50%" alt="" class="center">
+      <img src="./Finaltapedispenser.png" width="50%" alt="" class="center">
 
-  <p>That is all for this week. Thank you!!</p>
+      <p>That is all for this week. Thank you!</p>
 
-  <p> [Return home](../index.html). </p>
+    </div>  
+    </div>    
+  </body>
+</div>
 
-</xmp>
-</body>
-
-<script src="https://strapdownjs.com/v/0.2/strapdown.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" ></script>
+<div class="w3-row-padding w3-padding-large w3-pale-yellow" style="margin-bottom:32px"> </div> </div>
+  
+<div class="w3-center w3-padding w3-black" style="margin-left:225px"><p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="w3-hover-opacity">w3.css</a></p><p>Mohammed Mutaher 2022</p></div>
 
 </html>

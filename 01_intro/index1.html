@@ -1,37 +1,72 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <title>PHYSCI 70: Intro to Digital Fabrication </title>
-  <meta charset="utf-8">
-  <link href="./style.css" rel="stylesheet">
-</head>
-<body>
+<html>
+<title>Mohammed Mutaher - PHYSCI 70</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
+</style>
+<body class="w3-pale-yellow w3-content" style="max-width:1600px">
 
+<!-- Sidebar/menu -->
+<nav class="w3-sidebar w3-collapse w3-white w3-animate-left" style="z-index:3;width:225px;" id="mySidebar"><br>
+  <div class="w3-container">
+    <a href="#" onclick="w3_close()" class="w3-hide-large w3-right w3-jumbo w3-padding w3-hover-grey" title="close menu">
+      <i class="fa fa-remove"></i>
+    </a>
+    <img src="./Pfp.png" 
+      style="object-fit:cover;
+        object-position: center;
+            width:62px;
+            height:62px"
+      class="w3-round"><br><br>
+    <h4><b>Navigation</b></h4>
+  </div>
+  <div class="w3-bar-block">
+    <a href="https://mohammed-mutaher.github.io/PHYSCI-70/" onclick="w3_close()" class="w3-bar-item w3-button w3-padding w3-text-teal"><i class="fa fa-th-large fa-fw w3-margin-right"></i>Home</a> 
+    <a href="./about.html" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-user fa-fw w3-margin-right"></i>About Me</a>
+    <a href="https://nathanmelenbrink.github.io/ps70/" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-gears fa-fw w3-margin-right"></i>About PHYSCI 70</a>
+  </div>
+</nav>
 
-<xmp theme="journal" style="display:none;">
+<!-- Overlay effect when opening sidebar on small screens -->
+<div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
 
-<div class="container-fluid">
+<!-- !PAGE CONTENT! -->
+<div class="w3-main" style="margin-left:250px">
 
-  ### Week 1: Final Project Proposal  
+<!-- Header -->
+  <header id="Week 1">
+    <a href="#"><img src="/w3images/avatar_g2.jpg" style="width:65px;" class="w3-circle w3-right w3-margin w3-hide-large w3-hover-opacity"></a>
+    <span class="w3-button w3-hide-large w3-xxlarge w3-hover-text-grey" onclick="w3_open()"><i class="fa fa-bars"></i></span>
+    <div class="w3-container">
+    <div class="w3-section w3-padding-10">
+    <h1><b>Week 1: Final Project Proposal</b></h1>
+    <div class="w3-section w3-bottombar w3-border-white w3-padding-10"> </div>
+    </div>
+  </header>
 
-  <p> I have several ideas for my final project. Potential candidates are a 2-D drawing machine, a device that can stir milk, and a stairlift/elevator for pets. This is the first makerspace that I have stepped foot in, so I am unsure how any of these projects will turn out. The 2-D drawing machine is pretty straightforward. If modified, it could reasonably be used as a latte art machine (which are ridiculously expensive) or to draw on icing for cakes. </p>
+<!-- Body -->
+<div class="w3-margin-left">
+  <body id="Text">
+    <div class="w3-container">
+    <div class="w3-section w3-padding-10">
 
-  <p> The inspiration for a device that can stir milk came from the time I spent cooking with my mother. Some of the deserts that she makes require boiling milk, which can be a time-consuming process because if you do not stir the consistently, the milk will either burn. Constant supervision is required because the milk can also boil over. The device would be able to stir the bottom of the pot consistently, be adaptable for different sized pots, and perhaps turn off the stove once the boiling temperature of milk is reached. </p>
+      <p> I have several ideas for my final project. Potential candidates are a 2-D drawing machine, a device that can stir milk, and a stairlift/elevator for pets. This is the first makerspace that I have stepped foot in, so I am unsure how any of these projects will turn out. The 2-D drawing machine is pretty straightforward. If modified, it could reasonably be used as a latte art machine (which are ridiculously expensive) or to draw on icing for cakes. </p>
 
-  <p> Lastly, I thought about making a stairlift/elevator for pets. More specifically, it would be used in cases where the pet is older and cannot climb up and down the stairs easily. This would would be weight-activated, so it would move only when the pet steps onto the platform. The pet should not be able to get off mid-ride, and the lift should be able to go both ways. </p>
+      <p> The inspiration for a device that can stir milk came from the time I spent cooking with my mother. Some of the deserts that she makes require boiling milk, which can be a time-consuming process because if you do not stir the consistently, the milk will either burn. Constant supervision is required because the milk can also boil over. The device would be able to stir the bottom of the pot consistently, be adaptable for different sized pots, and perhaps turn off the stove once the boiling temperature of milk is reached. </p>
 
-  <p> [Return home](../index.html). </p>
+      <p> Lastly, I thought about making a stairlift/elevator for pets. More specifically, it would be used in cases where the pet is older and cannot climb up and down the stairs easily. This would would be weight-activated, so it would move only when the pet steps onto the platform. The pet should not be able to get off mid-ride, and the lift should be able to go both ways. </p>
+    </div>  
+    </div>    
+  </body>
+</div>
 
-      
-   
-
-
-
-
-</xmp>
-</body>
-
-<script src="https://strapdownjs.com/v/0.2/strapdown.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" ></script>
+<div class="w3-row-padding w3-padding-large w3-pale-yellow" style="margin-bottom:32px"> </div> </div>
+  
+<div class="w3-center w3-padding w3-black" style="margin-left:225px"><p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="w3-hover-opacity">w3.css</a></p><p>Mohammed Mutaher 2022</p></div>
 
 </html>
