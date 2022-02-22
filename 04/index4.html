@@ -6,6 +6,10 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/arduino-light.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/highlight.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/arduino.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
 <style>
 body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
 </style>
@@ -91,7 +95,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
           </ul>
       </p>
 
-      <p> Here are some pictures of this week's project, with some close-ups! </p>
+      <p> I'm really happy with the way the project came out. Here are some pictures of this week's project, with some close-ups!</p>
 
       <img src="./Candid1.jpg" width="50%" alt="" class="center">
       <img src="./Candid2.jpg" width="50%" alt="" class="center">
@@ -103,6 +107,28 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
 
       <img src="./Compare1.jpg" width="50%" alt="" class="center">
       <img src="./Compare2.jpg" width="50%" alt="" class="center">
+
+      <p> I powered the motor using the adafruit microcontroller connected to an L9110 H Bridge Power Driver to drive it. The code I had uploaded on the microcontroller was from class on Thursday, so the motor ran for 4 seconds and turned off for 2 seconds (rinse and repeat). </p>
+
+      <p> Here is a short video of the motor turning on and off following this pattern:</p>
+
+      <video width="320" height="240" controls>
+      <source src="./Stopandgo.mp4" type=video/mp4>
+      </video>
+
+      <p> As a side note, this was my first time using the motor to run the kinetic sculpture and I was happy and relieved at the same time that it worked as intended. </p>
+
+      <pre><code class="language-arduino">
+      void loop(){
+        int i = 2;
+        int j = 3;
+      }
+      </code></pre>
+
+
+
+
+
 
 
 
