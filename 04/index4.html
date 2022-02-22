@@ -82,6 +82,9 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
             <li>Carved out portions of the wings to make them lighter. This was to reduce the weight difference between the wings and the body of the butterfly</li>
             <li>Designed the wings so they had holes (outside of the main body of the wing) that could be used to connect them to the body of the butterfly. Previously, I had used a drill bit and made the holes manually in the body of the wing itself</li>
             <li>Designed and laser-cut a body for the butterly, complete with antennae. Previously, I had used a popsicle stick glued to the center column of skewer holes as the body</li>
+              <ul>
+                <li> <img src="./Sketch.jpg" width="50%" alt="" class="center"> </li>
+              </ul>
             <li>Desined and laser-cut other miscellaneous pieces, including the housing for the motor and pieces to more efficiently and effectively translate motor movement into rotation of the dowel. Previously, I had attached the motor to the dowel using a mess of hot glue and duct tape) 
         </ul>
       </p>
@@ -155,21 +158,45 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
 
       <p> As a side note, this was my first time using the motor to run the kinetic sculpture! I was happy and relieved at the same time that it worked as intended. </p>
 
+      <p> I wanted to slow down and speed up the flapping of the wings to see which looked more natural, so I chose to create a circuit with a potentiometer. I followed the instructions on the <a href = "https://nathanmelenbrink.github.io/ps70/04_arduino/L9110.html<class website">class website</a> and uploaded the code that was posted there to the microcontroller. One thing to note is that the potentiometer did not fit into the A0, A2, and A4 pins on the microcontroller, so I improvised and used a breadboard to complete the circuit. Also, I used my computer to power the circuit so I used 5V instead of 9V.</p>
 
+      <p> This is what the finished circuit looked like: </p>
 
+      <img src="./Circuit1.jpg" width="50%" alt="" class="center">
+      <img src="./Circuit2.jpg" width="50%" alt="" class="center">
 
+      <p> Here is the code:</p>
 
+      <pre><code class="language-arduino">
+      /*  Code to run motor in one direction based on potentiometer reading.
+       *  Motor driver speed control on pin 3 (direction LOW by default)
+       *  Potentiometer plugged into A0, A2, and A4 on Metro M0 (or similar).
+       */
 
+      void setup() {
+        pinMode(3, OUTPUT);
+        pinMode(A0, OUTPUT);  //This will be GND for the potentiometer
+        pinMode(A4, OUTPUT);  //This will be 3.3V for the pot
 
+        digitalWrite(A0, LOW);
+        digitalWrite(A4, HIGH);
+      }
 
+      void loop() {
+        int pot_value = analogRead(A2);   //pot wiper is on A2
+        int motor_speed = map(pot_value, 0, 1023, 255, 0); // map motor_level to pot_value so that zero corresponds to lowest speed
+        analogWrite(3, motor_speed);
+        delay(1);
+      }
+      </code></pre>
 
+      <p> With the circuit now complete and the code uploaded onto the microcontroller, I turned the dial of the potentiometer from the off position to the full speed position. Apologies for the noise in the background, but here is a video of me playing around with the potentiometer:</p>
 
+      <video width="320" height="240" controls>
+      <source src="./Butterfly_potentiometer.mp4" type=video/mp4>
+      </video>
 
-
-
-      Work in progress!
-
-      </p></h5>
+      <p>That is all for this week. Thank you!</p></h5> 
 
     </div>  
     </div>    
