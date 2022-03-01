@@ -8,11 +8,9 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
 }
 
 .column {
-  float: left;
+  float: center;
   width: 33.33%;
   padding: 5px;
-  align-items: center;
-  justify-content: center;
 }
 
 .row::after {
@@ -20,5 +18,4 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
   clear: both;
   display: table;
   align-items: center;
-  justify-content: center;
 }
