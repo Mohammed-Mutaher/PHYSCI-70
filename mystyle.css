@@ -23,3 +23,10 @@ img {
 .img4 { flex: 1.5023; }
 .img5 { flex: 0.75; }
 
+.pics_in_a_row {
+  margin: 25px 0;
+}
+
+.pics_in_a_row > div:not(:last-child) {
+  margin-right: 2%;
+}
