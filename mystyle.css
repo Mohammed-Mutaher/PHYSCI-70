@@ -12,11 +12,13 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
   width: 33.33%;
   padding: 5px;
   align-items: center;
+  justify-content: center;
 }
 
 .row::after {
   content: "";
   clear: both;
   display: table;
-  align-items: center
+  align-items: center;
+  justify-content: center;
 }
