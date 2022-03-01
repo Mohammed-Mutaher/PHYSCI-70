@@ -8,6 +8,19 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
 body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
+
+.column {
+  float: left;
+  width: 33.33%;
+  padding: 5px;
+}
+
+.row::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
 </style>
 <body class="w3-pale-yellow w3-content" style="max-width:1600px">
 
@@ -69,6 +82,27 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
 
 
       <p> Here are some photos of the process: </p>
+
+      <div class="row">
+        <div class="column">
+          <img src="./Printjob.jpg" alt="" style="width:100%">
+        </div>
+        <div class="column">
+          <img src="./Printwithsupport.jpg" alt="" style="width:100%">
+        </div>
+        <div class="column">
+          <img src="/Supportsremoved.jpg" alt="" style="width:100%">
+        </div>
+        <div class="column">
+          <img src="./Naviside.jpg" alt="" style="width:100%">
+        </div>
+        <div class="column">
+          <img src="./Navibehind.jpg" alt="" style="width:100%">
+        </div>
+        <div class="column">
+          <img src="./Navifinal.jpg" alt="" style="width:100%">
+        </div>
+      </div>
 
       <img src="./Printjob.jpg" width="30%" alt="" class="center">
       <img src="./Printwithsupport.jpg" width="30%" alt="" class="center">
