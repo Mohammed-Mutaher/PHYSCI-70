@@ -58,12 +58,55 @@
 
           <p> I will work on the assignment over spring break. This week has just been really difficult and I have not been feeling well. I'm not in a good headspace and I'm tired (not the kind of tired that sleep can fix, though). Sorry, and if I lose points because of this I understand. </p>
 
-          <p> The plan was to make something similar to the cup in class, but have another cup inside that one such that small objects could be added. The water in the main cup would get displaced, this would be read by the serial read function, and based on the graph we could estimate how many of the small objects were added. </p>
+          
 
           <p> For the second part, I was going to calibrate a magnetic field sensor. </p>
 
-          <p> For this week, we were tasked with making a capacitive sensor to measure a physical quantity, using another sensor of our choosing, and calibrating both sensors. 
-      
+          <p> This week, we were tasked with making a capacitive sensor to measure a physical quantity, using another sensor of our choosing, and calibrating both sensors. 
+
+          <p> For the first part of the assignment, I made a water cup capacitor that measures water displacement depending on the number of marbles added to the cup. The goal was to be able to estimate the number of marbles added by using the trend line of the graph from the callibration step. </p>
+
+          <p> Regarding the microcontroller and breadboard setup, I put two 1MOhm resistors between 3.3V and GND and used Robert Hart's program to measure transmit-receive signals across space between two copper foil squares. Here is the code, follwed by pictures of the microcontroller and breadboard:
+
+          <pre><code class="language-arduino">
+
+            // rx_tx02  Robert Hart Mar 2019.
+            // Program to use transmit-receive across space between two conductors
+            // One conductor attached to A1, one to A3
+
+            int read_high;
+            int read_low;
+            int diff;
+            long int sum;
+            int N_samples = 100;    //Number of samples to take.  Larger number slows it down, but reduces scatter.
+
+            int analog_pin = A3;
+            int tx_pin = A1;
+
+            void setup() {
+            pinMode(tx_pin,OUTPUT);      //Pin A1 provides the voltage step
+            Serial.begin(115200);
+            }
+
+            void loop() {
+
+             sum = 0;
+
+             for (int i = 0; i < N_samples; i++){
+               digitalWrite(tx_pin,HIGH);              //Step the voltage high on conductor 1.
+               read_high = analogRead(analog_pin);        //Measure response of conductor 2.
+               delayMicroseconds(100);            //Delay to reach steady state.
+               digitalWrite(tx_pin,LOW);               //Step the voltage to zero on conductor 1.
+               read_low = analogRead(analog_pin);         //Measure response of conductor 2.
+               diff = read_high - read_low;       //desired answer is the difference between high and low.
+               sum += diff;                       //Sums up N_samples of these measurements.
+             }
+            Serial.println(sum);
+            //delay(100);
+            }
+          </code></pre>
+     
+          
           <style type="text/css">
             table.tableizer-table {
               font-size: 12px;
@@ -74,7 +117,7 @@
             .tableizer-table td {
               padding: 4px;
               margin: 3px;
-              column-width: 150px;
+              column-width: 200px;
               border: 1px solid #CCC;
             }
             .tableizer-table th {
