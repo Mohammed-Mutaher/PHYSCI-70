@@ -78,13 +78,13 @@
             int read_low;
             int diff;
             long int sum;
-            int N_samples = 100;    //Number of samples to take.  Larger number slows it down, but reduces scatter.
+            int N_samples = 100;                        //Number of samples to take.  Larger number slows it down, but reduces scatter.
 
             int analog_pin = A3;
             int tx_pin = A1;
 
             void setup() {
-            pinMode(tx_pin,OUTPUT);      //Pin A1 provides the voltage step
+            pinMode(tx_pin,OUTPUT);                     //Pin A1 provides the voltage step
             Serial.begin(115200);
             }
 
@@ -93,20 +93,28 @@
              sum = 0;
 
              for (int i = 0; i < N_samples; i++){
-               digitalWrite(tx_pin,HIGH);              //Step the voltage high on conductor 1.
-               read_high = analogRead(analog_pin);        //Measure response of conductor 2.
-               delayMicroseconds(100);            //Delay to reach steady state.
-               digitalWrite(tx_pin,LOW);               //Step the voltage to zero on conductor 1.
-               read_low = analogRead(analog_pin);         //Measure response of conductor 2.
-               diff = read_high - read_low;       //desired answer is the difference between high and low.
-               sum += diff;                       //Sums up N_samples of these measurements.
+               digitalWrite(tx_pin,HIGH);               //Step the voltage high on conductor 1.
+               read_high = analogRead(analog_pin);      //Measure response of conductor 2.
+               delayMicroseconds(100);                  //Delay to reach steady state.
+               digitalWrite(tx_pin,LOW);                //Step the voltage to zero on conductor 1.
+               read_low = analogRead(analog_pin);       //Measure response of conductor 2.
+               diff = read_high - read_low;             //Desired answer is the difference between high and low.
+               sum += diff;                             //Sums up N_samples of these measurements.
              }
             Serial.println(sum);
             //delay(100);
             }
           </code></pre>
      
-          
+          <div class="row">
+            <div class="column2">
+              <img src="./Setup1.jpg" alt="" style="width:100%">
+            </div>
+            <div class="column2">
+            <img src="./Setup2.jpg" alt="" style="width:100%">
+
+
+
           <style type="text/css">
             table.tableizer-table {
               font-size: 12px;
