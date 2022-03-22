@@ -58,15 +58,15 @@
 
           <p> I will work on the assignment over spring break. This week has just been really difficult and I have not been feeling well. I'm not in a good headspace and I'm tired (not the kind of tired that sleep can fix, though). Sorry, and if I lose points because of this I understand. </p>
 
-          
-
           <p> For the second part, I was going to calibrate a magnetic field sensor. </p>
 
-          <p> This week, we were tasked with making a capacitive sensor to measure a physical quantity, using another sensor of our choosing, and calibrating both sensors. 
+
+
+          <p> This week, we were tasked with making a capacitive sensor to measure a physical quantity, using another sensor of our choosing, and calibrating both sensors. </p>
 
           <p> For the first part of the assignment, I made a water cup capacitor that measures water displacement depending on the number of marbles added to the cup. The goal was to be able to estimate the number of marbles added by using the trend line of the graph from the callibration step. </p>
 
-          <p> Regarding the microcontroller and breadboard setup, I put two 1MOhm resistors between 3.3V and GND and used Robert Hart's program to measure transmit-receive signals across space between two copper foil squares. Here is the code, follwed by pictures of the microcontroller and breadboard:
+          <p> Regarding the microcontroller and breadboard setup, I put two 1MOhm resistors between 3.3V and GND and used Robert Hart's program to measure transmit-receive signals across space between two copper foil squares. Here is the code, follwed by pictures of the microcontroller and breadboard: </p>
 
           <pre><code class="language-arduino">
             // rx_tx02  Robert Hart Mar 2019.
@@ -114,12 +114,14 @@
             </div>
           </div>
 
-          <p> I compiled the readings from the serial plotter function into a table and created
+          <p> I added approximately 100mL of tap water to the cup, which was enough that the water level in the cup was the same height as the bottom of the copper foil squares. The water level in the cup rose with every marble added such that the volume of water displaced was equal to the amount of water then present between the two foil squares. I compiled the readings from the serial plotter function into a table and generated two graphs, one with a logarithmic trendline and the other with a linear trendline. </p>
 
-          <img src="./29_to_30.png" alt="" class="center" style="width:50%">
+          <p> Here is what the serial plotter looked like every time I added a marble to the cup (in this case, the 30th marble): </p>
+
+          <p> <img src="./29_to_30.png" alt="" class="center" style="width:50%"> </p>
 
 
-
+          <p> And here are the table and graphs: </p>
 
           <style type="text/css">
             table.tableizer-table {
