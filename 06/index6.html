@@ -63,7 +63,7 @@
 
           <p> This week, we were tasked with making a capacitive sensor to measure a physical quantity, using another sensor of our choosing, and calibrating both sensors. </p>
 
-          <p><b> Making and callibrating a capacitive sensor </b></p>
+          <p><b> Making and calibrating a capacitive sensor </b></p>
 
           <p> For the first part of the assignment, I made a water cup capacitor that measures water displacement depending on the number of marbles added to the cup. The goal was to be able to estimate the number of marbles added by using the trend line of the graph from the callibration step. </p>
 
@@ -198,10 +198,43 @@
 
           <p> I also experimented with taking marbles out of the cup. I wanted to see if the serial plotter values would decrease to the value I originally observed because that would demonstrate consistentcy in the reading. It would be important for estimating the number of marbles in the cup at any given time as well. I found that it took significantly longer for the serial plotter readings to stabilize when a marble was taken out (about 5-10 minutes) as compared to when a marble was added (about 1-2 minutes), and that the capacitor system was very sensistive to any perturbations in the environment, for example if I moved my laptop or sat closer to the cup. That said, when I took 5 of 30 marbles out, the capacitor re-stabilized at 41400, which was closer to the value for marble 26 (41600) than the value for marble 25 (40680). Then, when I added the five marbles back for a total of 30 marbles in the cup, the capacitor restabilized at 45420 instead of 44800 (expected value). Plugging 45420 into the linear model, we get an estimated 31.8 marbles. I imagine this discrepancy is because the cup shifted away from me a little, but nonetheless the values were approximately correct such that I could estimate the number of marbles in the cup (within 2 marbles). </p>
 
+          <p>  </p>
 
+          <p><b> Using and calibrating a magnetic field sensor </b></p>
 
-          <p> For the second part of the assignment, I was going to calibrate a magnetic field sensor. </p>
+          <p> For the second part of the assignment, I used and calibrated a magnetic field sensor. I had a lot of difficulty callibrating this sensor and spent hours trying to get consistent readings. I think that part of the reason it was so difficult was that I was using a magnet fragment with an irregular shape. It also took me an embarrassingly long time to figure out that the readings were affected by which side (or pole) of the magnet was facing the sensor, which in hindsight should have been obvious to me from the start. My numbers were different from the values reported in the <a href="https://roberthart56.github.io/SCFAB/SC_lab/Sensors/magnetic/index.html">example</a> linked on the website and I spent a lot of time trying to figure out why. Potential reasons I was able to think of include strength of the magnet and environmental conditions (for example, temperature). I eventually added a 1 MOhm resistor on my breadboard to stabilize the readings from serial monitor as well. </p>
 
+          <p> Here are pictures of the magnet and the microcontroller-breadboard setup: </p>
+
+          <div class="row">
+            <div class="column2">
+              <img src="./Magnet.jpg" alt="" style="width:100%"> </p>
+            </div>
+            <div class="column2">
+              <img src="./Setup3.jpg" alt="" style="width:100%"> </p>
+            </div>
+          </div>
+
+          <p> I used a slightly modified version of the <a href="https://www.arduino.cc/en/Tutorial/BuiltInExamples/AnalogReadSerial">AnalogReadSerial</a> example provided in the arduino software for the code. Two modifications I made were changing the serial communication speed from 9600 to 115200 baud and increasing the delay from 1 to 10 milliseconds (for stability). Here is the code:</p>
+
+          <pre><code class="language-arduino">
+          // the setup routine runs once when you press reset:
+          void setup() {
+            // initialize serial communication at 115200 bits per second:
+            Serial.begin(115200);
+          }
+
+          // the loop routine runs over and over again forever:
+          void loop() {
+            // read the input on analog pin 0:
+            int sensorValue = analogRead(A0);
+            // print out the value you read:
+            Serial.println(sensorValue);
+            delay(10);        // delay in between reads for stability
+          }
+          </code></pre>
+
+          <p> Then, to calibrate the hall sensor, I used 0.5mm spacers. I compiled the readings from the serial monitor function into a table and generated a graph based on the data. Both are shown below. </p>
 
           <div class="row">
             <div class="column2">
