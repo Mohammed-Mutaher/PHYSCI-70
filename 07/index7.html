@@ -56,7 +56,7 @@
 
       <h5><p> 
 
-      Work in progress!
+      <h1> Work in progress! </h1>
 
       <div class="row">
         <div class="column2">
@@ -66,6 +66,33 @@
           <img src="./Piezo_LED_Breadboard.jpg" alt="" style="width:100%"> </p>
         </div>
       </div>
+
+      <pre><code class="language-arduino">
+          int ledPin = 11; // LED on Digital Pin 11
+          float ledValue = 0; // The brightness of the LED
+          int piezoPin = 5; // Piezo on Analog Pin 5
+          int threshold = 120; // The sensor value to reach before activation
+          int sensorValue = 0; // A variable to store the value read from the sensor
+
+          void setup() {
+          pinMode(ledPin, OUTPUT); // Set the ledPin to an OUTPUT
+          // Flash the LED twice to show the program has started
+          digitalWrite(ledPin, HIGH); delay(150); digitalWrite(ledPin,
+          LOW); delay(150);
+          digitalWrite(ledPin, HIGH); delay(150); digitalWrite(ledPin,
+          LOW); delay(150);
+          }
+
+          void loop() {
+          sensorValue = analogRead(piezoPin); // Read the value from the sensor
+          if (sensorValue >= threshold) { // If Piezo is touched, turn on the LED
+          ledValue = 150;
+          }
+          analogWrite(ledPin, int(ledValue) ); // Write brightness value to LED
+          ledValue = ledValue - 0.05; // Dim the LED slowly
+          if (ledValue <= 0) {ledValue = 0;} // Make sure value does not go below zero
+          }
+          </code></pre>
 
       <div class="w3-center">
         <video width="320" height="240" controls>
@@ -81,6 +108,51 @@
           <img src="./Piezo_LED_Servo_Breadboard.jpg" alt="" style="width:100%"> </p>
         </div>
       </div>
+
+      <pre><code class="language-arduino">
+        int ledPin = 11; // LED on Digital Pin 11
+        float ledValue = 0; // The brightness of the LED
+        int piezoPin = 5; // Piezo on Analog Pin 5
+        int threshold = 120; // The sensor value to reach before activation
+        int sensorValue = 0; // A variable to store the value read from the sensor
+        #include <Servo.h>
+        Servo myservo;  // Create servo object to control the servo
+        int pos = 0;    // Variable to store the servo position
+
+        void setup() {
+        pinMode(ledPin, OUTPUT); // Set the ledPin to an OUTPUT
+        // Flash the LED twice to show the program has started
+        digitalWrite(ledPin, HIGH); delay(150); digitalWrite(ledPin,
+        LOW); delay(150);
+        digitalWrite(ledPin, HIGH); delay(150); digitalWrite(ledPin,
+        LOW); delay(150);
+        myservo.attach(9);  // Attaches Servo object to the servo on Digital Pin 9
+        }
+
+        void loop() {
+
+        sensorValue = analogRead(piezoPin); // Read the value from the sensor
+
+        if (sensorValue >= threshold) { // If Piezo is touched, 
+        ledValue = 150; // ...turn on the LED
+        pos = 180; // ...set servo position variable to 180
+        myservo.write(pos); // Servo moves to position in variable 'pos'
+        delay(150); // Waits for the servo to get there
+        }
+
+        if (sensorValue <= threshold) { // If Piezo is not touched, 
+        ledValue = 0; // ...turn off the LED
+        pos = 0; // ...set servo position variable to 0
+        myservo.write(pos); // Servo moves to position in variable 'pos'
+        delay(150); // Waits for the servo to get there
+        }
+
+        analogWrite(ledPin, int(ledValue) ); // Write brightness value to LED
+        ledValue = ledValue - 0.05; // Dim the LED slowly
+        if (ledValue <= 0) {ledValue = 0;} // Make sure value does not go below zero
+        }
+          </code></pre>
+
 
       <div class="w3-center">
         <video width="320" height="240" controls>
