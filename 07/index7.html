@@ -58,6 +58,8 @@
 
       <h1> Work in progress! </h1>
 
+      <p> Piezo and LED: </p>
+
       <div class="row">
         <div class="column2">
           <img src="./Piezo_LED_Electronics.jpg" alt="" style="width:100%"> </p>
@@ -101,6 +103,8 @@
         <source src="./Piezo_LED_Video.mp4" type=video/mp4>
         </video>
       </div>
+
+      <p> Piezo, LED, and Servo: </p>
 
       <div class="row">
         <div class="column2">
@@ -162,6 +166,73 @@
         </video>
       </div>
 
+      <p> Piezo, RGB LED, and Servo using delay(): </p>
+
+      <div class="row">
+        <div class="column2">
+          <img src="./Piezo_RGB_Servo_Delay_Electronics.jpg" alt="" style="width:100%"> </p>
+        </div>
+        <div class="column2">
+          <img src="./Piezo_RGB_Servo_Delay_Breadboard.jpg" alt="" style="width:100%"> </p>
+        </div>
+      </div>
+
+      <pre><code class="language-arduino">
+        int red_light_pin= 11; 
+        int green_light_pin = 10;
+        int blue_light_pin = 9;
+        int piezoPin = 5; // Piezo on Analog Pin 5
+        int threshold = 120; // The sensor value to reach before activation
+        int sensorValue = 0; // A variable to store the value read from the sensor
+        #include <Servo.h>
+        Servo myservo;  // Create servo object to control the servo
+        int pos = 0;    // Variable to store the servo position
+
+        void RGB_color(int red_light_value, int green_light_value, int blue_light_value) // Allows us to enter specific color values
+         {
+          analogWrite(red_light_pin, red_light_value);
+          analogWrite(green_light_pin, green_light_value);
+          analogWrite(blue_light_pin, blue_light_value);
+        }
+
+        void setup() {
+          pinMode(red_light_pin, OUTPUT);  // Set the red_light_pin to an OUTPUT
+          pinMode(green_light_pin, OUTPUT); // Set the green_light_pin to an OUTPUT
+          pinMode(blue_light_pin, OUTPUT); // Set the blue_light_pin to an OUTPUT
+          // Flash the LED twice to show the program has started
+          digitalWrite(green_light_pin, HIGH); delay(150); digitalWrite(green_light_pin,
+          LOW); delay(150);
+          digitalWrite(green_light_pin, HIGH); delay(150); digitalWrite(green_light_pin,
+          LOW); delay(150);
+          myservo.attach(3);  // Attaches Servo object to the servo on Digital Pin 3
+        }
+
+        void loop() {
+
+        sensorValue = analogRead(piezoPin); // Read the value from the sensor
+
+        if (sensorValue <= threshold) { // If Piezo is not touched, 
+        RGB_color(0, 0, 255); // ...LED is blue
+        pos = 0; // ...set servo position variable to 0
+        myservo.write(pos); // Servo moves to position in variable 'pos'
+        delay(150); // Waits for the servo to get there
+        }
+
+        if (sensorValue >= threshold) { // If Piezo is touched, 
+        RGB_color(255, 0, 0); // ...LED is red
+        pos = 180; // ...set servo position variable to 180
+        myservo.write(pos); // Servo moves to position in variable 'pos'
+        delay(150); // Waits for the servo to get there
+        }
+        }
+          </code></pre>
+
+
+      <div class="w3-center">
+        <video width="320" height="240" controls>
+        <source src="./Piezo_RGB_Servo_Delay_Video.mp4" type=video/mp4>
+        </video>
+      </div>
 
       </p></h5>
 
