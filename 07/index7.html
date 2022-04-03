@@ -185,10 +185,10 @@
 
       <div class="row">
         <div class="column2">
-          <img src="./Piezo_RGB_Servo_Delay_Electronics.jpg" alt="" style="width:100%"> </p>
+          <img src="./Piezo_RGB_Servo_Electronics.jpg" alt="" style="width:100%"> </p>
         </div>
         <div class="column2">
-          <img src="./Piezo_RGB_Servo_Delay_Breadboard.jpg" alt="" style="width:100%"> </p>
+          <img src="./Piezo_RGB_Servo_Breadboard.jpg" alt="" style="width:100%"> </p>
         </div>
       </div>
 
@@ -251,6 +251,53 @@
         <source src="./Piezo_RGB_Servo_Delay_Video.mp4" type=video/mp4>
         </video>
       </div>
+
+
+      <p><h3><b> Piezo, RGB LED, and Servo using millis(): </b></h3></p>
+
+      <p> Setup (same as before): </p>
+
+      <div class="row">
+        <div class="column2">
+          <img src="./Piezo_RGB_Servo_Electronics.jpg" alt="" style="width:100%"> </p>
+        </div>
+        <div class="column2">
+          <img src="./Piezo_RGB_Servo_Breadboard.jpg" alt="" style="width:100%"> </p>
+        </div>
+      </div>
+
+      <p> Code: </p>
+
+      <pre><code class="language-arduino">
+        int red_light_pin= 11; 
+        int green_light_pin = 10;
+        int blue_light_pin = 9;
+        int piezoPin = 5; // Piezo on Analog Pin 5
+        int threshold = 120; // The sensor value to reach before activation
+        int sensorValue = 0; // A variable to store the value read from the sensor
+        #include <Servo.h>
+        Servo myservo;  // Create servo object to control the servo
+        int pos = 0;    // Variable to store the servo position
+
+        void RGB_color(int red_light_value, int green_light_value, int blue_light_value) // Allows us to enter specific color values
+         {
+          analogWrite(red_light_pin, red_light_value);
+          analogWrite(green_light_pin, green_light_value);
+          analogWrite(blue_light_pin, blue_light_value);
+        }
+
+        IN PROGRESS
+
+          </code></pre>
+
+      <p> Video: </p>
+
+      <div class="w3-center">
+        <video width="400" height="300" controls>
+        <source src="./Piezo_RGB_Servo_Millis_Video.mp4" type=video/mp4>
+        </video>
+      </div>
+
 
       </p></h5>
 
