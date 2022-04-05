@@ -62,8 +62,9 @@
   
       <p> We were instructed to use an output device that we had not used yet, and to write a microcontroller program that integrates an input and an output device. Additionally, we were encouraged to avoid using the delay() function and experiment with using either timers or interrupts. Lastly, we were tasked with using an oscilloscope to discover the time domain the output device is operating at. </p>
 
-      <p> I started this week's assignment with a piezo sensor (input) and green LED (output) setup. I then added a servo motor (output) to the setup so that I could experiment with having two output devices controlled by the same input device. Next, I replaced the green LED with an RGB LED (output) and modified the code accordingly so that the functionality was preserved. Having successfully added the RGB LED to the setup, I experimented with the millis() function. 
+      <p> I started this week's assignment with a piezo sensor (input) and green LED (output) setup. I then added a servo motor (output) to the setup so that I could experiment with having two output devices controlled by the same input device. Next, I replaced the green LED with an RGB LED (output) and modified the code accordingly so that the functionality was preserved. Having successfully added the RGB LED to the setup, I experimented with using the millis() function in place of the delay() function. </p>
 
+      <br>
 
       <p><h3><b> Piezo and LED: </b></h3></p> 
 
@@ -77,17 +78,6 @@
           <img src="./Piezo_LED_Breadboard.jpg" alt="" style="width:100%"> </p>
         </div>
       </div>
-      
-      <!--  
-
-        https://create.arduino.cc/projecthub/sarful/arduino-workshop-piezo-knock-sensor-da6d83?ref=user&ref_id=520827&offset=10
-        https://arduinogetstarted.com/tutorials/arduino-rgb-led
-        https://create.arduino.cc/projecthub/muhammad-aqib/arduino-rgb-led-tutorial-fc003e
-        https://create.arduino.cc/projecthub/patatoDude/rgb-led-basics-a6fe50
-        https://forum.arduino.cc/t/rgb-blinkg-with-millis/513728/6
-        https://www.youtube.com/watch?v=BYKQ9rk0FEQ
-
-      -->
 
       <p> Code: </p> 
 
@@ -117,6 +107,8 @@
           if (ledValue <= 0) {ledValue = 0;} // Make sure value does not go below zero
           }
           </code></pre>
+
+      <p> The device works as expected. The goal was to have the LED flash twice upon startup, and then have the LED turn on whenever the piezo sensor was activated. I found that touching the piezo sensor was enough to consistently get a signal greater than 120, so even though a the piezo sensor is not intended as a touch sensor, I used it as one for the purpose of the assignment this week. Here is a video showing the setup and code in action: <p>
 
       <div class="w3-center">
         <video width="400" height="300" controls>
@@ -268,6 +260,7 @@
         </video>
       </div>
 
+      <br>
 
       <p><h3><b> Piezo, RGB LED, and Servo using millis(): </b></h3></p>
 
@@ -389,7 +382,7 @@
         Flasher led3(9, 1000, 1000); // Green
 
         Sweeper sweeper1(15);
-         
+
 
         void setup() 
         { 
@@ -397,11 +390,10 @@
           sweeper1.Attach(3);
         } 
          
-         
+      
         void loop() 
         { 
           sensorValue = analogRead(piezoPin); // Read the value from the sensor
-
           sweeper1.Update(); // Servo will move back and forth from 0 to 180 degrees
 
           if (sensorValue <= threshold) { // If Piezo is not touched, 
@@ -423,6 +415,18 @@
       </div>
 
         3. Use an oscilloscope to discover the time domain at which your output device is operating. Is it on a fixed clock? What's its speed? Share images and describe your findings.
+
+
+      <!--  
+
+        https://create.arduino.cc/projecthub/sarful/arduino-workshop-piezo-knock-sensor-da6d83?ref=user&ref_id=520827&offset=10
+        https://arduinogetstarted.com/tutorials/arduino-rgb-led
+        https://create.arduino.cc/projecthub/muhammad-aqib/arduino-rgb-led-tutorial-fc003e
+        https://create.arduino.cc/projecthub/patatoDude/rgb-led-basics-a6fe50
+        https://forum.arduino.cc/t/rgb-blinkg-with-millis/513728/6
+        https://www.youtube.com/watch?v=BYKQ9rk0FEQ
+
+      -->
 
       </p></h5>
 
