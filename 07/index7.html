@@ -62,7 +62,7 @@
   
       <p> We were instructed to use an output device that we had not used yet, and to write a microcontroller program that integrates an input and an output device. Additionally, we were encouraged to avoid using the delay() function and experiment with using either timers or interrupts. Lastly, we were tasked with using an oscilloscope to discover the time domain the output device is operating at. </p>
 
-      <p> I started this week's assignment with a piezo sensor (input) and green LED (output) setup. I then added a servo motor (output) to the setup so that I could experiment with having two output devices controlled by the same input device. Next, I replaced the green LED with an RGB LED (output) and modified the code accordingly so that the functionality was preserved. Having successfully added the RGB LED to the setup, I experimented with using the millis() function in place of the delay() function. </p>
+      <p> I started this week's assignment with a piezo sensor (input) and green LED (output) setup. I then added a servo motor (output) to the setup so that I could experiment with having two output devices controlled by the same input device. Next, I replaced the green LED with an RGB LED (output) and modified the code accordingly so that the functionality was preserved. Having successfully added the RGB LED to the setup, I experimented with using the millis() function in place of the delay() function. Any relevant resources I consulted while working on this week's assignment are listed at the bottom of the page. </p>
 
       <br>
 
@@ -108,13 +108,15 @@
           }
           </code></pre>
 
-      <p> The device works as expected. The goal was to have the LED flash twice upon startup, and then have the LED turn on whenever the piezo sensor was activated. I found that touching the piezo sensor was enough to consistently get a signal greater than 120, so even though a the piezo sensor is not intended as a touch sensor, I used it as one for the purpose of the assignment this week. Here is a video showing the setup and code in action: <p>
+      <p> Video: </p>
 
       <div class="w3-center">
         <video width="400" height="300" controls>
         <source src="./Piezo_LED_Video.mp4" type=video/mp4>
         </video>
       </div>
+
+      <p> The device works as expected. The goal was to have the LED flash twice upon startup, and then have the LED turn on whenever the piezo sensor was activated (and be off otherwise). I found that touching the piezo sensor was enough to consistently get a signal greater than 120, so even though a the piezo sensor is not intended as a touch sensor, I used it as one for the purpose of the assignment this week. <p>
 
       <br>
 
@@ -185,6 +187,8 @@
         </video>
       </div>
 
+      <p> The device works as expected. The goal was to have the LED flash twice upon startup, have the LED turn on whenever the piezo sensor was activated (and be off otherwise), and make the servo motor move to the 180 degrees postion whenever the piezo sensor was activated (and return to the 0 degree position otherwise). <p>
+
       <br>
 
       <p><h3><b> Piezo, RGB LED, and Servo using delay(): </b></h3></p>
@@ -237,14 +241,14 @@
         sensorValue = analogRead(piezoPin); // Read the value from the sensor
 
         if (sensorValue <= threshold) { // If Piezo is not touched, 
-        RGB_color(0, 0, 255); // ...LED is blue
+        RGB_color(0, 0, 255); // ...RGB LED is blue
         pos = 0; // ...set servo position variable to 0
         myservo.write(pos); // Servo moves to position in variable 'pos'
         delay(150); // Waits for the servo to get there
         }
 
         if (sensorValue >= threshold) { // If Piezo is touched, 
-        RGB_color(255, 0, 0); // ...LED is red
+        RGB_color(255, 0, 0); // ...RGB LED is red
         pos = 180; // ...set servo position variable to 180
         myservo.write(pos); // Servo moves to position in variable 'pos'
         delay(150); // Waits for the servo to get there
@@ -259,6 +263,8 @@
         <source src="./Piezo_RGB_Servo_Delay_Video.mp4" type=video/mp4>
         </video>
       </div>
+
+      <p> The device works as expected. The goal was to have the RGB LED flash green twice upon startup, have the RGB LED turn red whenever the piezo sensor was activated (and turn blue otherwise), and make the servo motor move to the 180 degrees postion whenever the piezo sensor was activated (and return to the 0 degree position otherwise). I also got rid of the dim function at this point. <p>
 
       <br>
 
@@ -414,19 +420,32 @@
         </video>
       </div>
 
-        3. Use an oscilloscope to discover the time domain at which your output device is operating. Is it on a fixed clock? What's its speed? Share images and describe your findings.
+
+      <p> When a delay() statement is being run the program cannot respond to inputs or process any data, and the user cannot change any outputs. The millis() function can be used in place of the delay() function and is ideal for repetitive timed events. It also avoids the aforementioned shortcomings of the delay() function. </p>
+
+      <p> For this iteration of the program, I wanted to experiment mainly with the millis() function. I deleted the code that used the delay() function to flash the RGB LED twice upon startup because replacing that instance of the delay() function with millis() resulted in the RGB LED constantly flashing green for the set on and off times. Nonetheless, I left "Flasher led3(9, 1000, 1000);" in the code so that I could easily change the color of the RGB LED to green if I wanted to. The goal was to have the RGB LED flash red (on for one second, off for one second) whenever the piezo sensor was activated (and flash blue otherwise) and make the servo motor move back and forth constantly between the 0 and 180 degrees postion. I found it interesting that the RGB LED would flash both red and blue when the piezo sensor was activated, and that it only flashed red when the piezo sensor was not activated. It flashing both blue and red when activated was unintended, and I spent hours trying to get it to flash only blue when the piezo sensor was activated without any success. For example, I tried creating a "Flasher led1b(11, 0, 0);" instance and placing it before "led3.Update();" in the "if (sensorValue >= threshold){}" statement but that unfortunately did not work. Another thing I tried was placing the "if (sensorValue >= threshold){}" before the "if (sensorValue <= threshold){}" statement, but that had no effect. The only explanation I can think of is that the millis() function is not intended to be interrupted after being called, but this explanation does not explain why the RGB LED does not continue to flash red and blue after the piezo sensor is activated once and then left alone. Regarding the servo, I decoupled it from the piezo sensor input and ran it independent of an "if" statement under void loop(){}. As intended, the servo consistently swept from 0 to 180 and back at regular intervals while the program was running. <p>
+
+      <br>
+
+      <p><h3><b> Using the oscilloscope: </b></h3></p>
+
+      <p><h2> IN PROGRESS </h2></p>
+
+      <p> 3. Use an oscilloscope to discover the time domain at which your output device is operating. Is it on a fixed clock? What's its speed? Share images and describe your findings. </p>
 
 
-      <!--  
 
-        https://create.arduino.cc/projecthub/sarful/arduino-workshop-piezo-knock-sensor-da6d83?ref=user&ref_id=520827&offset=10
-        https://arduinogetstarted.com/tutorials/arduino-rgb-led
-        https://create.arduino.cc/projecthub/muhammad-aqib/arduino-rgb-led-tutorial-fc003e
-        https://create.arduino.cc/projecthub/patatoDude/rgb-led-basics-a6fe50
-        https://forum.arduino.cc/t/rgb-blinkg-with-millis/513728/6
-        https://www.youtube.com/watch?v=BYKQ9rk0FEQ
-
-      -->
+      <p> Relevant sources referenced:
+        <ul style="list-style-type:disc">
+            <li>https://arduinogetstarted.com/tutorials/arduino-rgb-led</li>
+            <li>https://create.arduino.cc/projecthub/muhammad-aqib/arduino-rgb-led-tutorial-fc003e</li>
+            <li>https://create.arduino.cc/projecthub/patatoDude/rgb-led-basics-a6fe50</li>
+            <li>https://create.arduino.cc/projecthub/sarful/arduino-workshop-piezo-knock-sensor-da6d83?ref=user&ref_id=520827&offset=10</li>
+            <li>https://forum.arduino.cc/t/rgb-blinkg-with-millis/513728/6</li>
+            <li>https://roberthart56.github.io/SCFAB/SC_lab/Output_Devices/Light/led/index.html</li>
+            <li>https://www.youtube.com/watch?v=BYKQ9rk0FEQ</li>
+        </ul>
+      </p>
 
       </p></h5>
 
