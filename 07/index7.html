@@ -433,7 +433,7 @@
 
       <p> 3. Use an oscilloscope to discover the time domain at which your output device is operating. Is it on a fixed clock? What's its speed? Share images and describe your findings. </p>
 
-      <p> Arduino sends pulse lengths. Motor interprets that as a position and moves accordingly. Clockwise motion of servo corresponds to narrower pulse on oscilloscope. Difference between the start of each pulse is the same, but the but the pulse lengths change depending on motor's position. Since the difference (both in terms of length annd time) between the start of each pulse is constant, the servo motor is operating on a fixed clock. </p>
+      <p> I was able to measure the time domain at which the servo motor was operating in the final iteration of this week's project (see "Piezo, RGB LED, and Servo using millis()" section above). Chris helped me with this section of the assignment. Basically, the arduino sends pulse lengths that the servo motor interprets as a position, and it moves accordingly. As shown in the video, clockwise motion of the servo motor corresponds to a narrower pulse on the oscilloscope and counter-clockwise motion corresponds to a wider pulse. Although the pulse lengths change depending on motor's position, the difference between the start of each pulse is the same. Since the difference between the start of each pulse is constant, the servo motor is operating on a fixed clock. </p>
 
 
       </p>
