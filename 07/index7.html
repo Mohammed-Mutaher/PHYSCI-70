@@ -56,8 +56,6 @@
 
       <h5><p> 
 
-      <h1> Work in progress! </h1>
-
       <p> This week, we focused on electronic output devices. </p>
   
       <p> We were instructed to use an output device that we had not used yet, and to write a microcontroller program that integrates an input and an output device. Additionally, we were encouraged to avoid using the delay() function and experiment with using either timers or interrupts. Lastly, we were tasked with using an oscilloscope to discover the time domain the output device is operating at. </p>
@@ -420,7 +418,6 @@
         </video>
       </div>
 
-
       <p> When a delay() statement is being run the program cannot respond to inputs or process any data, and the user cannot change any outputs. The millis() function can be used in place of the delay() function and is ideal for repetitive timed events. It also avoids the aforementioned shortcomings of the delay() function. </p>
 
       <p> For this iteration of the program, I wanted to experiment mainly with the millis() function. I deleted the code that used the delay() function to flash the RGB LED twice upon startup because replacing that instance of the delay() function with millis() resulted in the RGB LED constantly flashing green for the set on and off times. Nonetheless, I left "Flasher led3(9, 1000, 1000);" in the code so that I could easily change the color of the RGB LED to green if I wanted to. The goal was to have the RGB LED flash red (on for one second, off for one second) whenever the piezo sensor was activated (and flash blue otherwise) and make the servo motor move back and forth constantly between the 0 and 180 degrees postion. I found it interesting that the RGB LED would flash both red and blue when the piezo sensor was activated, and that it only flashed red when the piezo sensor was not activated. It flashing both blue and red when activated was unintended, and I spent hours trying to get it to flash only blue when the piezo sensor was activated without any success. For example, I tried creating a "Flasher led1b(11, 0, 0);" instance and placing it before "led3.Update();" in the "if (sensorValue >= threshold){}" statement but that unfortunately did not work. Another thing I tried was placing the "if (sensorValue >= threshold){}" before the "if (sensorValue <= threshold){}" statement, but that had no effect. The only explanation I can think of is that the millis() function is not intended to be interrupted after being called, but this explanation does not explain why the RGB LED does not continue to flash red and blue after the piezo sensor is activated once and then left alone. Regarding the servo, I decoupled it from the piezo sensor input and ran it independent of an "if" statement under void loop(){}. As intended, the servo consistently swept from 0 to 180 and back at regular intervals while the program was running. <p>
@@ -429,14 +426,34 @@
 
       <p><h3><b> Using the oscilloscope: </b></h3></p>
 
-      <p><h2> IN PROGRESS </h2></p>
+      <p> I was able to measure the time domain at which the servo motor was operating in the final iteration of this week's project (see "Piezo, RGB LED, and Servo using millis()" section above). Chris helped me with this section of the assignment. Basically, the arduino sends pulse lengths that the servo motor interprets as a position, and it moves accordingly. As shown in the video, clockwise motion of the servo motor corresponds to a narrower pulse on the oscilloscope and counter-clockwise motion corresponds to a wider pulse: </p>
 
-      <p> 3. Use an oscilloscope to discover the time domain at which your output device is operating. Is it on a fixed clock? What's its speed? Share images and describe your findings. </p>
+      <p> Video: </p>
 
-      <p> I was able to measure the time domain at which the servo motor was operating in the final iteration of this week's project (see "Piezo, RGB LED, and Servo using millis()" section above). Chris helped me with this section of the assignment. Basically, the arduino sends pulse lengths that the servo motor interprets as a position, and it moves accordingly. As shown in the video, clockwise motion of the servo motor corresponds to a narrower pulse on the oscilloscope and counter-clockwise motion corresponds to a wider pulse. Although the pulse lengths change depending on motor's position, the difference between the start of each pulse is the same. Since the difference between the start of each pulse is constant, the servo motor is operating on a fixed clock. </p>
+      <div class="w3-center">
+        <video width="400" height="300" controls>
+        <source src="./Oscilloscope_Video.mp4" type=video/mp4>
+        </video>
+      </div>
 
+      <p> Although the pulse lengths change depending on motor's position, the difference between the start of each pulse is the same. Since the difference between the start of each pulse is constant, the servo motor is operating on a fixed clock. The speed, as indicated on the display, is less than 10 Hertz (<10Hz). </p>
 
-      </p>
+      <div class="row">
+        <div class="column2">
+          <img src="./Oscilloscope_Narrow.jpg" alt="" style="width:100%"> </p>
+        </div>
+        <div class="column2">
+          <img src="./Oscilloscope_Wider.jpg" alt="" style="width:100%"> </p>
+        </div>
+      </div>
+
+      <p> Lastly, I made a graphic summarizing all the information in this section: </p>
+
+      <img src="./Oscilloscope_Explanation.png" width="50%" alt="" class="center">
+
+      <br>
+
+      <p> And that is all for this week. Thank you! </p>
 
       <br>
 
@@ -472,4 +489,3 @@
 </div>
 
 </html>
-
