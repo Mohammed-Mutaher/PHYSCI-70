@@ -68,14 +68,14 @@
 
       <p> I followed the tutorial linked <a href="https://roberthart56.github.io/SCFAB/SC_lab/Networking/networking/USART/index.html">here</a> to facilitate communication between the Adafruit Metro microcontroller and an ESP32-based Feather board. The goal was to have a potentionmeter connected to the microcontroller, which would communicate with the ESP32 board to control the position of a servo motor connected to the latter. </p>
 
-      <p> On my first attempt, I replicated the wiring setup in the tutorial and tried to upload the code for both the microcontroller and ESP32 board provided in the tutorial. The wiring setup and code from the tutorial are shown below.  
+      <p> On my first attempt, I replicated the wiring setup in the tutorial and tried to upload the code for both the Metro and ESP32 board provided in the tutorial. The wiring setup and code from the tutorial are shown below.  
 
 
       <p> Wiring setup: </p>
 
       <img src="./Wiresetup1.jpg" width="50%" alt="" class="center">
 
-      <p> Microcontroller code: </p>
+      <p> Metro microcontroller code: </p>
 
       <pre><code class="language-arduino">
         //Code to transmit
@@ -143,7 +143,7 @@
 
       <img src="./Wiresetup2.jpg" width="50%" alt="" class="center">
 
-      <p> Modified microcontroller code: </p>
+      <p> Modified Metro microcontroller code: </p>
 
       <pre><code class="language-arduino">
         //Code to transmit
@@ -206,6 +206,21 @@
         <source src="./Test1.mp4" type=video/mp4>
         </video>
       </div>
+
+      <p> As you can see in the pictures and video above, I powered both the Metro microcontroller and ESP32 separately using USB cables connected to my laptop. I also wanted to see if the microcontroller could be used to power the ESP32 board. I first tried connecting the 3.3V pin on the microcontroller to the the 3V pin on the ESP32 board without success. After looking at the pinout diagram of the ESP32 board, I noticed that there was a USB pin. I promptly connected the 5V pin from the microcontroller to the USB pin on the ESP32 board, and it powered on. 
+
+      <div class="row">
+        <div class="column2">
+          <p> Wiring setup: </p>
+          <img src="./Toolpath1.png" alt="" style="width:100%"> </p>
+        </div>
+        <div class="column2">
+          <p> Video: </p>
+          <video controls>
+          <source src="./Test1.mp4" type=video/mp4>
+          </video> </p>
+        </div>
+      </div> 
 
 
       </p></h5>
