@@ -134,9 +134,11 @@
         }
       </code></pre>
 
+      <br>
+
       <p> The code for the microntroller and the ESP32 board would not upload and the program instead returned error messages for both. First, I focused on the microcontroller code. I quickly realized that the tutorial uses an Adafruit Metro Express microcontroller, which has two serial ports versus the microcontroller I was using, which only has one. Due to the fact that there was no "Serial1" on my board, the code would not upload without an error. So, I deleted the "Serial1.begin(9600);" line under void setup(){} and replaced the "Serial1.write(pot_value/4);" line under void loop(){} with "Serial.write(pot_value/4);". I also commented out the "Serial.println(pot_value);" line in the code. Having made these changes, I also changed the wiring so that instead of one signal wire connecting the TX1 pin on the microcontroller to the RX/16 pin on the ESP32 board, there were two wires (one connecting the microcontroller TX1 pin to the RX/16 pin on the ESP32 board and the other connecting the microcontroller RX0 pin to the TX/17 pin on the ESP32 board). </p>
 
-      <p> With respect to the code for the ESP32 board, I realized that the issue was the use of the ESP32Servo.h library. I downloaded the ESP32 Arduino Servo Library linked <a href="https://github.com/RoboticsBrno/ServoESP32">here</a> and replaced the "#include <ESP32Servo.h>" line in the original code with "#include <Servo.h>". This fixed the uploading issue, and with that I was ready to test the device. The modified wiring setup and code are shown below.
+      <p> With respect to the code for the ESP32 board, I realized that the issue was the use of the ESP32Servo.h library. I downloaded the ESP32 Arduino Servo Library linked <a href="https://github.com/RoboticsBrno/ServoESP32">here</a> and replaced the "#include &lt;ESP32Servo.h&gt;" line in the original code with "#include &lt;Servo.h&gt;". This fixed the uploading issue, and with that I was ready to test the device. The modified wiring setup and code are shown below.
 
      
       <p> Modified wiring setup: </p>
