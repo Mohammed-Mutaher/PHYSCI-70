@@ -66,9 +66,23 @@
 
       <p><h3><b> Part 1: Calibrating Stepper Motor Position Using a Hall Effect Sensor </b></h3></p>
 
-      <p> Following the tutorial linked above, I was able to calibrate motor position using a homing sequence that guarantees the "home" position is the same every time the device is powered on or restarted. I followed the schematic shown below to complete the wiring setup. This part of the project only requires the magnetic hall sensor attached to pin 3. As such, I did not connect the second magnetic hall sensor attached until I moved on to the second part of the project (which involves using both sensors). </p>
+      <p> Following the tutorial linked above, I was able to calibrate motor position using a homing sequence that guarantees the "home" position is the same every time the device is powered on or restarted. I followed the schematic shown below to complete the wiring setup. </p>
 
       <img src="./Wiring_schematic.png" width="50%" alt="" class="center">
+
+      <p> I used a 9V DC power supply instead of a 12V DC power supply. To power the breadboard using this adapter, I attached a power jack and soldered wires onto the leads. Then, to ensure that it was working as intended, I plugged the adapter into a wall socket and used a voltmeter to measure the output as shown in the pictures below. </p>
+
+        <div class="row">
+          <p> Adapting the 9V DC power supply for the breadboard: </p>
+          <div class="column2">
+            <img src="./Powerjack.jpg" alt="" style="width:100%"> </p>
+          </div>
+          <div class="column2">
+            <img src="./Voltmeter_reading.jpg" alt="" style="width:100%"> </p>
+          </div>
+        </div> 
+
+        <p> Additionally, this part of the project only requires the magnetic hall sensor attached to pin 3. As such, I did not connect the second magnetic hall sensor attached until I moved on to the second part of the project (which involves using both sensors). </p>
 
       <div class="row">
         <p> Wire setup: </p>
@@ -79,6 +93,76 @@
           <img src="./Wiresetup2.jpg" alt="" style="width:100%"> </p>
         </div>
       </div> 
+
+      <p> The code is as follows:
+
+      <pre><code class="language-arduino">
+        /*
+          Stepper Motor Homing Switch Demo
+          stepper-homing-demo.ino
+          Uses Hall Effect sensor as homing switch
+          Uses A4988 Stepper Motor Driver module
+
+          DroneBot Workshop 2019
+          https://dronebotworkshop.com
+        */
+
+        // Define connections
+        #define HALL_SENSOR      3
+        #define DIR      10
+        #define STEP      11
+
+        // Direction Variable
+        boolean setdir = LOW;
+
+        void homefunction() {
+          // Set motor speed pulse duration
+          int pd = 4000;
+
+          // Move motor until home position reached
+          while (digitalRead(HALL_SENSOR) == 1) {
+
+            digitalWrite(DIR, setdir);
+            digitalWrite(STEP, HIGH);
+            delayMicroseconds(pd);
+            digitalWrite(STEP, LOW);
+            delayMicroseconds(pd);
+          }
+
+        }
+
+        void setup() {
+
+          // Setup the stepper controller pins as Outputs
+          pinMode(DIR, OUTPUT);
+          pinMode(STEP, OUTPUT);
+
+          // Setup the Hall Effect switch as an Input
+          pinMode(HALL_SENSOR, INPUT);
+
+          // Home the motor
+          homefunction();
+
+        }
+
+        void loop() {
+
+          // Loop, put code here
+
+        }
+      </code></pre>
+
+      <p> I modified the original code above to include "Serial.begin(9600);" under void setup(){} and "Serial.println(digitalRead(HALL_SENSOR));" under void loop(){} because I needed to troubleshoot. As it turned out, I had mixed up the power and ground pins on the magnetic hall sensor so it was not working as intended at first. (Note: The pictures of the wiring setup above were taken after I corrected the wiring.) I also moved the "homefunction();" command from void setup(){} to void loop(){} so that I could experiment with the magnetic hall sensor and better understand how it works in the hopes of using it as potential mechanism to control my final project. </p>
+
+      <p> And here it is in action, with the modifications I made to the code. I attached a piece of tape to the shaft of the stepper motor to make its rotation easier to see: </p>
+
+      <div class="w3-center">
+        <video width="400" height="300" controls>
+        <source src="./Homing_sequence.mp4" type=video/mp4>
+        </video>
+      </div>
+
+       <p> Note that by reversing the poles of the magnet, I can get the motor to start and stop. While this functionality would not be particularly useful in the context of my final project, I found it really interesting! I also realized that if I used the original code with "homefunction();"" inside of void setup(){} versus void loop(){}, I could use it to calibrate the position of the stepper motor in my final project. </p>
 
 
 
