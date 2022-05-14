@@ -63,11 +63,15 @@
         </video>
       </div>
 
+      <br>
+
       <p><h3><b> Motivation </b></h3></p>
 
       <p> The motivation for my final project came from a YouTube video by Liam Thompson, linked <a href="https://youtu.be/Yg3SWcxMeF4">here</a>. In the video, he builds an elevator for his cat, Frodo, who was 19 years old at the time and had difficulty getting around the house. At the time of writing this, Frodo has unfortunately passed away. After hearing the news, I realized that I had grown attached to Frodo- a cat across the world that I had never even seen in-person- but his passing mid-way through the semester was a major motivator for me to take on the project in earnest. Apart from older animals, there are also pets with disabilities. And some breeds, in particular the dachshund and the chihuahua, have body morphologies that are not suited for climbing the stairs. Additionally, puppies and kittens may have difficulty due to their size and unsteadiness on their paws. I also wanted to take on the engineering challenge of trying to make the elevator adjustable both in terms of length and angle relative to the ground. </p>
 
-      <p><h3><b> Project Documentation </b></h3></p>
+      <br>
+
+      <p><h3><b> Project Documentation: Fabrication </b></h3></p>
 
       <p> Planning the build was arguably the hardest part of the process. I invested a lot of time into thinking about potential solutions to the issues of length and angle correction of the carriage. For example, what would be the best (feasible) way to make the frame itself extendable? Since extending the frame also means adjusting the length of the timing belt, how could I do that most effectively? And if the length of the elevator frame can vary, how could I program the stepper motor to stop at the top and bottom of the stairs given that counting steps was not an option? How could I adjust the carriage so that it was parallel to the ground regardless of the angle of the elevator? </p>
 
@@ -189,13 +193,13 @@
 
       <div class="row">
         <div class="column3">
+          <img src="./PT5.jpg" alt="" style="width:100%"> </p>
+        </div>
+        <div class="column3">
           <img src="./PT1.jpg" alt="" style="width:100%"> </p>
         </div>
         <div class="column3">
           <img src="./PT2.jpg" alt="" style="width:100%"> </p>
-        </div>
-        <div class="column3">
-          <img src="./PT3.jpg" alt="" style="width:100%"> </p>
         </div>
       </div>
 
@@ -204,34 +208,348 @@
           <img src="./PT4.jpg" alt="" style="width:100%"> </p>
         </div>
         <div class="column3">
-          <img src="./PT5.jpg" alt="" style="width:100%"> </p>
+          <img src="./PT3.jpg" alt="" style="width:100%"> </p>
         </div>
         <div class="column3">
           <img src="./PT6.jpg" alt="" style="width:100%"> </p>
         </div>
       </div>
 
+      <br>
+
+      <p><h3><b> Project Documentation: Electronics </b></h3></p>
+
+      <p> The goals of the project in terms of how I wanted it to function are described in the demo video. I do not have a background in computer science or programming, so I went into the coding process blindly. I borrowed, drew inspiration from, and modified aspects of the code from the <a href="https://mohammed-mutaher.github.io/PHYSCI-70/10/index10.html">Week 10</a> assignment because of how similar the outcomes are to what we want in this project. I had been thinking about using magnetic hall sensors to control where the elevator stops on the frame since week six, but it was not until week 10 that I really had a chance to experiment with different outcomes depending on inputs from hall sensors. </p>
+
+      <p> Here is the initial program I tested. Majority of it is actually code I wrote after reading through several forums and asking silly questions on Google, for example the ways in which while and if statements are different. The homing sequence is taken directly from the week 10 project, however. I used digitalRead() a lot because the tutorial I followed for the week 10 assignment did. </p>
+
+      <pre><code class="language-arduino">
+        // Define connections
+        #define DIR               10
+        #define STEP              11
+        #define Hall_sensor_top   2
+        #define Hall_sensor_bot   3
+        int Touch_sensor_top   =  A0;
+        int Touch_sensor_bot   =  A1;
 
 
+        void homefunction() {
+          // Set motor speed pulse duration
+          int pd = 4000;
+
+          // Move motor until home position reached
+            digitalWrite(DIR, LOW);
+            delay(1000);
+            while (digitalRead(Hall_sensor_bot) == 1) {
+            digitalWrite(STEP, HIGH);
+            delayMicroseconds(pd);
+            digitalWrite(STEP, LOW);
+            delayMicroseconds(pd);
+          }
+        }
+
+        void setup() {
+          Serial.begin(9600);
+          // Setup the stepper controller pins as outputs
+          pinMode(DIR, OUTPUT);
+          pinMode(STEP, OUTPUT);
+
+          // Setup the hall effect sensors as an input
+          pinMode(Hall_sensor_top, INPUT);
+          pinMode(Hall_sensor_bot, INPUT);
+
+          // Setup the touch sensors as inputs
+          pinMode(Touch_sensor_top, INPUT);
+          pinMode(Touch_sensor_bot, INPUT);
+
+          // Home the motor
+          homefunction();
+
+        }
+
+        void loop()  {
+
+          //If the bottom touch sensor is activated, and the top hall sensor is activated or the bottom hall sensor is not activated...
+
+          if (digitalRead(Touch_sensor_bot) == 1 && (digitalRead(Hall_sensor_top) == 1) || (digitalRead(Hall_sensor_bot == 0))) {
+
+            //Move down
+            while (digitalRead(Hall_sensor_bot) == 0) {
+              digitalWrite(DIR, LOW); //Figure out direction
+              digitalWrite(STEP, HIGH);
+              delayMicroseconds(4000);
+              digitalWrite(STEP, LOW);
+              delayMicroseconds(4000);
+            }
 
 
+            if (digitalRead(Hall_sensor_bot == 1)) {
+              //Time to get on elevator
+              delay(5000);
 
-      To check analog values:
+              //Moving up
+              while (digitalRead(Hall_sensor_top == 0)) {
+                digitalWrite(DIR, HIGH); //Figure out direction. Reverse of before
+                digitalWrite(STEP, HIGH);
+                delayMicroseconds(4000);
+                digitalWrite(STEP, LOW);
+                delayMicroseconds(4000);
+              }
+              
+              //Time to get off elevator
+              delay(5000);
 
-      // the setup routine runs once when you press reset:
+              digitalWrite(Hall_sensor_top, 0);
+            }
+          }
+
+          //If the top touch sensor is activated, and the bottom hall sensor is activated or the top hall sensor is not activated...
+
+          if (digitalRead(Touch_sensor_top) == 1 && (digitalRead(Hall_sensor_bot) == 1) || (digitalRead(Hall_sensor_top == 0))) {
+
+            //Move up
+            while (digitalRead(Hall_sensor_top == 0)) {
+              digitalWrite(DIR, HIGH); //Figure out direction
+              digitalWrite(STEP, HIGH);
+              delayMicroseconds(4000);
+              digitalWrite(STEP, LOW);
+              delayMicroseconds(4000);
+            }
+
+
+             //Time to get on elevator
+             if (digitalRead(Hall_sensor_top == 1)) {
+             delay(5000);
+
+            //Moving down
+            while (digitalRead(Hall_sensor_top == 0)) {
+            digitalWrite(DIR, LOW); //Figure out direction. Reverse of before
+            digitalWrite(STEP, HIGH);
+            delayMicroseconds(4000);
+            digitalWrite(STEP, LOW);
+            delayMicroseconds(4000);
+            }
+
+             //Time to get off elevator
+             delay(5000);
+
+              digitalWrite(Hall_sensor_top, 0);
+            }
+          }
+        }
+      </code></pre>
+
+      <p> I did all the troubleshooting while the carriage and timing belt were not connected to the servo for convenience.  I was having a lot of difficulty figuring out what the issue was in my code, however, and after speaking to Professor Melenbrink about it, I decided to change the inputs from the hall and pressure sensors to analogRead() instead of digitalRead(). I callibrated the sensors quickly by running the following code:
+
+        <pre><code class="language-arduino">
+          // the setup routine runs once when you press reset:
           void setup() {
-            // initialize serial communication at 9600 bits per second:
-            Serial.begin(9600);
+          // initialize serial communication at 9600 bits per second:
+          Serial.begin(9600);
           }
 
           // the loop routine runs over and over again forever:
           void loop() {
             // read the input on analog pin 0:
-            int sensorValue = analogRead(A4);
+            int sensorValue = analogRead(A0);
             // print out the value you read:
             Serial.println(sensorValue);
             delay(10);        // delay in between reads for stability
           }
+        </code></pre>
+
+        <p> Based on the results of using analog read serial, I went with about 70 as the cutoff for the bottom pressure sensor, about 100 for the top pressure sensor, and 530 for both magentic hall sensors. I also incoporated Serial.println() statements into each of the while loops in the code to determine which loop the program was stuck in. At first, it kept saying that it was stuck in while loop 2, so I changed the parameters and removed the && and || statements, and as I kept doing that for each while loop, I noticed that eventually the motor stopped getting stuck immediately after the homing sequence was over. Instead, I noticed that every time I touched the bottom sensor, it would enter into a while loop until I stopped applying pressure on the sensor. Perhaps more interestingly, it would cycle from being stuck in loop one to being stuck in loop two, to being stuck in loop three, and so on. All the input sensors were working fine, but the program could not seem to be able to parse my code. </p>
+
+        <p> I asked for help from several of my peers, but eventually gave up because the debugging process could have easily taken up several more hours. Here is what my code looked like (when I opted to use the code from week 10 to keep the elevator moving constantly from top to bottom): </p>
+
+        <pre><code class="language-arduino">
+          // Define connections
+          #define DIR              10
+          #define STEP             11
+          int Touch_sensor_bot = analogRead(A0);
+          int Touch_sensor_top = analogRead(A1);
+          int Hall_sensor_bot = analogRead(A2);
+          int Hall_sensor_top = analogRead(A3);
+
+          void homefunction() {
+            // Set motor speed pulse duration
+            int pd = 4000;
+
+            // Move motor until home position reached
+            delay(1000);
+            digitalWrite(DIR, LOW);
+
+
+            while (analogRead(Hall_sensor_bot) < 530) {
+              digitalWrite(STEP, HIGH);
+              delayMicroseconds(pd);
+              digitalWrite(STEP, LOW);
+              delayMicroseconds(pd);
+              Serial.println("Homing");
+            }
+          }
+
+
+          void setup() {
+            Serial.begin(9600);
+            // Setup the stepper controller pins as outputs
+            pinMode(DIR, OUTPUT);
+            pinMode(STEP, OUTPUT);
+
+            // Setup the hall effect sensors as an input
+            pinMode(Hall_sensor_top, INPUT);
+            pinMode(Hall_sensor_bot, INPUT);
+
+            // Setup the touch sensors as inputs
+            pinMode(Touch_sensor_top, INPUT);
+            pinMode(Touch_sensor_bot, INPUT);
+
+            // Home the motor
+          //  homefunction();
+          }
+
+
+          void loop()  {
+
+           if (analogRead(Touch_sensor_bot) < 100) {
+
+            Serial.println("Touch sensor bot");
+           
+              //Move down
+              while (analogRead(Hall_sensor_bot) < 530) {
+                digitalWrite(DIR, LOW); //Figure out direction
+                digitalWrite(STEP, HIGH);
+                delayMicroseconds(4000);
+                digitalWrite(STEP, LOW);
+                delayMicroseconds(4000);
+                //Serial.println("In while loop 1");
+
+                  //Time to get on elevator
+                  if (analogRead(Hall_sensor_bot) > 530) {
+                    delay(5000);
+                  }
+              }
+              
+                //Moving up
+                while (analogRead(Hall_sensor_top) < 530) {
+                  digitalWrite(DIR, HIGH); //Figure out direction. Reverse of before
+                  digitalWrite(STEP, HIGH);
+                  delayMicroseconds(4000);
+                  digitalWrite(STEP, LOW);
+                  delayMicroseconds(4000);
+                  //Serial.println("In while loop 2");
+                }
+
+                //Time to get off elevator
+                delay(5000);
+              }
+
+
+            if (analogRead(Touch_sensor_top) < 100) {
+
+                Serial.println("Touch sensor top");
+
+              //Move up
+              while (analogRead(Hall_sensor_top ) < 530) {
+                digitalWrite(DIR, HIGH); //Figure out direction
+                digitalWrite(STEP, HIGH);
+                delayMicroseconds(4000);
+                digitalWrite(STEP, LOW);
+                delayMicroseconds(4000);
+                //Serial.println("In while loop 3");
+                //Serial.println(analogRead(Hall_sensor_top));
+              }
+
+              //Time to get on elevator
+              if (analogRead(Hall_sensor_top )> 530) {
+                delay(5000);
+
+                //Moving down
+                while (analogRead(Hall_sensor_bot ) < 530) {
+                  digitalWrite(DIR, LOW); //Figure out direction. Reverse of before
+                  digitalWrite(STEP, HIGH);
+                  delayMicroseconds(4000);
+                  digitalWrite(STEP, LOW);
+                  delayMicroseconds(4000);
+                  //Serial.println("In while loop 4");
+                  //Serial.println(analogRead(Hall_sensor_bot));
+                }
+
+                //Time to get off elevator
+                delay(5000);
+              }
+            }
+            }
+        </code></pre>
+
+       <p> Here is the code from week 10 I was going to use as a backup: </p>
+
+       <pre><code class="language-arduino">
+       /*
+         Stepper Motor Limit Switch Demo
+         stepper-limit-demo.ino
+         Uses Hall Effect sensors as limit switches
+         Uses A4988 Stepper Motor Driver module
+         
+         DroneBot Workshop 2019
+         https://dronebotworkshop.com
+       */
+
+       // Define connections
+       #define HALL_SENSOR_A      2
+       #define HALL_SENSOR_B      3
+       #define DIR      10
+       #define STEP      11
+
+       // Variables
+       int pd = 4000;       // Pulse Delay period
+       boolean setdir = LOW; // Set Direction
+
+       // Interrupt Handlers
+
+       void limit_a (){
+
+         // Reverse motor
+         setdir = !setdir;
+         
+       }
+
+       void limit_b (){
+
+         // Reverse motor
+         setdir = !setdir;
+         
+       }
+
+
+       void setup() {
+         
+         // Setup the stepper controller pins as Outputs
+         pinMode(DIR,OUTPUT); 
+         pinMode(STEP,OUTPUT);
+         
+         // Setup the Hall Effect switches as Inputs
+         pinMode(HALL_SENSOR_A, INPUT);
+         pinMode(HALL_SENSOR_B, INPUT);
+         
+         // Attach interrupt pins to handlers
+         attachInterrupt(digitalPinToInterrupt(HALL_SENSOR_A), limit_a, FALLING);
+         attachInterrupt(digitalPinToInterrupt(HALL_SENSOR_B), limit_b, FALLING);
+          
+       }
+
+       void loop() {
+         
+           digitalWrite(DIR,setdir);
+           digitalWrite(STEP,HIGH);
+           delayMicroseconds(pd);
+           digitalWrite(STEP,LOW);
+           delayMicroseconds(pd);
+        
+       }
+     </code></pre>
+
+     <p> After I uploaded the code to my arduino, I quickly realized that the stepper motor could not handle the load of the carriage and it was acting very strangely. Also, one of the magnetic hall sensors that I had sautered (the one with wires extending to the top) started smoking and got fried as well. At that point, I knew the project would not be functional by the deadline but I was really happy with at least the fabrication portion. 
 
       </p></h5>
 
