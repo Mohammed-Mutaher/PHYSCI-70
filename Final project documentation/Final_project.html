@@ -339,7 +339,7 @@
         }
       </code></pre>
 
-      <p> I did all the troubleshooting while the carriage and timing belt were not connected to the servo for convenience.  I was having a lot of difficulty figuring out what the issue was in my code, however, and after speaking to Professor Melenbrink about it, I decided to change the inputs from the hall and pressure sensors to analogRead() instead of digitalRead(). I callibrated the sensors quickly by running the following code:
+      <p> I did all the troubleshooting while the carriage and timing belt were not connected to the servo for convenience. I was having a lot of difficulty figuring out what the issue was in my code, however, and after speaking to Professor Melenbrink about it, I decided to change the inputs from the hall and pressure sensors to analogRead() instead of digitalRead(). I calibrated the sensors quickly by running the following code:
 
         <pre><code class="language-arduino">
           // the setup routine runs once when you press reset:
@@ -358,7 +358,7 @@
           }
         </code></pre>
 
-        <p> Based on the results of using analog read serial, I went with about 70 as the cutoff for the bottom pressure sensor, about 100 for the top pressure sensor, and 530 for both magentic hall sensors. I also incoporated Serial.println() statements into each of the while loops in the code to determine which loop the program was stuck in. At first, it kept saying that it was stuck in while loop 2, so I changed the parameters and removed the && and || statements, and as I kept doing that for each while loop, I noticed that eventually the motor stopped getting stuck immediately after the homing sequence was over. Instead, I noticed that every time I touched the bottom sensor, it would enter into a while loop until I stopped applying pressure on the sensor. Perhaps more interestingly, it would cycle from being stuck in loop one to being stuck in loop two, to being stuck in loop three, and so on. All the input sensors were working fine, but the program could not seem to be able to parse my code. </p>
+        <p> Based on the results of using analog read serial, I went with about 70 as the cutoff for the bottom pressure sensor, about 100 for the top pressure sensor, and 530 for both magnetic hall sensors. I also incorporated Serial.println() statements into each of the while loops in the code to determine which loop the program was stuck in. At first, it kept saying that it was stuck in while loop 2, so I changed the parameters and removed the && and || statements, and as I kept doing that for each while loop, I noticed that eventually the motor stopped getting stuck immediately after the homing sequence was over. Instead, I noticed that every time I touched the bottom sensor, it would enter into a while loop until I stopped applying pressure on the sensor. Perhaps more interestingly, it would cycle from being stuck in loop one to being stuck in loop two, to being stuck in loop three, and so on. All the input sensors were working fine, but the program could not seem to be able to parse my code. </p>
 
         <p> I asked for help from several of my peers, but eventually gave up because the debugging process could have easily taken up several more hours. Here is what my code looked like (when I opted to use the code from week 10 to keep the elevator moving constantly from top to bottom): </p>
 
@@ -482,7 +482,7 @@
             }
         </code></pre>
 
-       <p> It was strange because sometimes the program only recognized one of the sensors, even though it kept gettiing the two mixed up in serial monitor. I could have been touching the bottom pressure sensor, for example, and it would identify it as the top sensor occasionally instead. So, I decided to leave the touch sensors out of the equation and upload a program that I knew worked. Here is the code from week 10 I decided to use: </p>
+       <p> It was strange because sometimes the program only recognized one of the sensors, even though it kept getting the two mixed up in serial monitor. I could have been touching the bottom pressure sensor, for example, and it would identify it as the top sensor occasionally instead. So, I decided to leave the touch sensors out of the equation and upload a program that I knew worked. Here is the code from week 10 I decided to use: </p>
 
        <pre><code class="language-arduino">
        /*
@@ -549,9 +549,9 @@
        }
      </code></pre>
 
-     <p> After I uploaded the code to my arduino, I quickly realized that the stepper motor could not handle the load of the carriage and it was acting very strangely. Also, one of the magnetic hall sensors that I had sautered (the one with wires extending to the top) started smoking and got fried as well. At that point, I knew the project would not be functional by the deadline but I was really happy with at least the fabrication aspect, even if the digital aspect did not quite work out. </p>
+     <p> After I uploaded the code to my microcontroller, I quickly realized that the stepper motor could not handle the load of the carriage and it was acting very strangely. A counterweight would have helped in ths regard. Also, one of the magnetic hall sensors that I had soldered (the one with wires extending to the top) started smoking and got fried as well. At that point, I knew the project would not be functional by the deadline but I was really happy with at least the fabrication aspect, even if the digital aspect did not quite work out. </p>
 
-     <p> Although I do not have a video of my project working, here are some final pictures with everything complete, including wiring and placement of magnetic hall sensors and magnets. </p>
+     <p> Although I do not have a video of my project working, here are some final pictures with everything complete, including wiring and placement of magnetic hall sensors and magnets.</p>
       
       <p> Wiring setup while testing individual components: </p>
 
