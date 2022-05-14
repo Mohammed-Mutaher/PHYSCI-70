@@ -65,7 +65,7 @@
 
           <p> The first tutorial involves talking to a p5 sketch over Serial. The instructions were pretty straightforward. I created a new folder, and in it I created the "index.html" and "sketch.js" files by saving the code below into Notepad. </p>
 
-          <p> <a href="./index1.txt">Click here for the code for the "index.html" file:</a> </p>
+          <p> <a href="./index1.txt">Click here for the code for the "index.html" file</a> </p>
 
           <p> Here is the code for the "script.js" file: </p>
 
@@ -186,62 +186,17 @@
 
         <p><h3><b> Tutorial 2: Visualization of Serial Input Data to P5.js </b></h3></p>
 
-        <p> For the second project, I followed the instructions and got the following results: </p>
-
+        <p> For the second tutorial, I followed the instructions and got the following results: </p>
+        
         <div class="w3-center">
           <video width="400" height="300" controls>
           <source src="./2.mp4" type=video/mp4>
           </video>
         </div>
 
-        <div class="w3-center">
-          <video width="400" height="300" controls>
-          <source src="./1.mp4" type=video/mp4>
-          </video>
-        </div>        
+        <p> The result from the first tutorial makes a little more sense now. The number ten kept popping up in the display and there was a wide range of numbers every second, and we see that in the graphical representation as well. The blips where we saw three-digit numbers are represented here by the momentary peaks that show when I turn the potentiometer. I am unsure why this was the case and why ten specifically was the baseline, but nonetheless the general trends are what we expected. </p>
 
-
-
-        <p> Here is the code I uploaded to the microntroller: </p>
-
-        <pre><code>
-          void setup() {
-            Serial.begin(9600); // initialize serial communications
-          }
-           
-          void loop() {
-            // read the input pin:
-            int potentiometer = analogRead(A0);                  
-            // remap the pot value to fit in 1 byte:
-            int mappedPot = map(potentiometer, 0, 1023, 0, 255); 
-            // print it out the serial port:
-            Serial.write(mappedPot);                             
-            // slight delay to stabilize the ADC:
-            delay(1);                                            
-          }
-        </code></pre>
-
-        <p> Here is the code I uploaded to the "index.html" file: </p>
-
-        <pre><code>
-          <p><!DOCTYPE html></p>
-          <html lang="en">
-            <head>
-              <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
-              <script language="javascript" type="text/javascript" src="https://cdn.jsdelivr.net/npm/p5.serialserver@0.0.28/lib/p5.serialport.js"></script>
-              <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/addons/p5.sound.min.js"></script>
-              <link rel="stylesheet" type="text/css" href="style.css">
-              <meta charset="utf-8" />
-
-            </head>
-            <body>
-              <main>
-              </main>
-              <script src="sketch.js"></script>
-            </body>
-          </html>
-        </code></pre>
-
+        <p> <a href="./index2.txt">Click here for the code for the "index.html" file</a> </p>
 
         <p> Here is the code for the "script.js" file: </p>
 
@@ -321,7 +276,26 @@
         }
         </code></pre>
 
+        <p> And here is the code I uploaded to the microntroller: </p>
 
+        <pre><code>
+          void setup() {
+            Serial.begin(9600); // initialize serial communications
+          }
+           
+          void loop() {
+            // read the input pin:
+            int potentiometer = analogRead(A0);                  
+            // remap the pot value to fit in 1 byte:
+            int mappedPot = map(potentiometer, 0, 1023, 0, 255); 
+            // print it out the serial port:
+            Serial.write(mappedPot);                             
+            // slight delay to stabilize the ADC:
+            delay(1);                                            
+          }
+        </code></pre>
+
+        <p> And that is all for this week! </p> 
 
       </p></h5>
 
