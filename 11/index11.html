@@ -65,124 +65,109 @@
 
           <p> The first tutorial involves talking to a p5 sketch over Serial. The instructions were pretty straightforward. I created a new folder, and in it I created the "index.html" and "sketch.js" files by saving the code below into Notepad. </p>
 
-          <p> Here is the code for the "index.html" file: </p>
+          <p> <a href="./index1.txt">Click here for the code for the "index.html" file:</a> </p>
 
-            <pre><code>
-              <!doctype html>
-              <html class="no-js" lang="en">
-              <head>
-                  <meta charset="UTF-8">
-                  <script language="javascript" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.0.0/lib/p5.js"></script>
-                  <script language="javascript" type="text/javascript" src="https://cdn.jsdelivr.net/npm/p5.serialserver@0.0.28/lib/p5.serialport.js"></script>
-                  <script language="javascript" type="text/javascript" src="sketch.js"></script>
-                </head>
-                <body>
+          <p> Here is the code for the "script.js" file: </p>
 
-                </body>
-              </html>
-            </code></pre>
+          <pre><code class="language-js">
 
-            <p> Here is the code for the "script.js" file: </p>
+          let serial;                             // variable to hold an instance of the serialport library
+          let portName = '/dev/cu.usbmodem1412301';  // fill in your serial port name here
+          let inData;                             // for incoming serial data
+          let serialDiv;                        // an HTML div to show incoming serial data
 
-            <pre><code class="language-js">
+          function setup() {
+            createCanvas(400, 300);
+            createHTML();                       // make some HTML to place incoming data into
+            serial = new p5.SerialPort();       // make a new instance of the serialport library
+            serial.on('list', printList);       // set a callback function for the serialport list event
+            serial.on('connected', serverConnected); // callback for connecting to the server
+            serial.on('open', portOpen);        // callback for the port opening
+            serial.on('data', serialEvent);     // callback for when new data arrives
+            serial.on('error', serialError);    // callback for errors
+            serial.on('close', portClose);      // callback for the port closing
 
-            let serial;                             // variable to hold an instance of the serialport library
-            let portName = '/dev/cu.usbmodem1412301';  // fill in your serial port name here
-            let inData;                             // for incoming serial data
-            let serialDiv;                        // an HTML div to show incoming serial data
+            serial.list();                      // list the serial ports
+            serial.open(portName);              // open a serial port
+          }
 
-            function setup() {
-              createCanvas(400, 300);
-              createHTML();                       // make some HTML to place incoming data into
-              serial = new p5.SerialPort();       // make a new instance of the serialport library
-              serial.on('list', printList);       // set a callback function for the serialport list event
-              serial.on('connected', serverConnected); // callback for connecting to the server
-              serial.on('open', portOpen);        // callback for the port opening
-              serial.on('data', serialEvent);     // callback for when new data arrives
-              serial.on('error', serialError);    // callback for errors
-              serial.on('close', portClose);      // callback for the port closing
-
-              serial.list();                      // list the serial ports
-              serial.open(portName);              // open a serial port
+          function draw() {
+            // black background, white text:
+            background(0);
+            fill(255);
+            // display the incoming serial data as a string:
+            text("sensor value: " + inData, 30, 30);
+            printData("sensor value: " + inData);
+          }
+          // get the list of ports:
+          function printList(portList) {
+            // portList is an array of serial port names
+            for (var i = 0; i < portList.length; i++) {
+              // Display the list the console:
+              console.log(i + " " + portList[i]);
             }
+          }
 
-            function draw() {
-              // black background, white text:
-              background(0);
-              fill(255);
-              // display the incoming serial data as a string:
-              text("sensor value: " + inData, 30, 30);
-              printData("sensor value: " + inData);
-            }
-            // get the list of ports:
-            function printList(portList) {
-              // portList is an array of serial port names
-              for (var i = 0; i < portList.length; i++) {
-                // Display the list the console:
-                console.log(i + " " + portList[i]);
-              }
-            }
+          function serverConnected() {
+            console.log('connected to server.');
+          }
 
-            function serverConnected() {
-              console.log('connected to server.');
-            }
+          function portOpen() {
+            console.log('the serial port opened.')
+          }
 
-            function portOpen() {
-              console.log('the serial port opened.')
-            }
+          function serialEvent() {
+            // read a byte from the serial port, convert it to a number:
+            inData = Number(serial.read());
+          }
 
-            function serialEvent() {
-              // read a byte from the serial port, convert it to a number:
-              inData = Number(serial.read());
-            }
+          function serialError(err) {
+            console.log('Something went wrong with the serial port. ' + err);
+          }
 
-            function serialError(err) {
-              console.log('Something went wrong with the serial port. ' + err);
-            }
+          function portClose() {
+            console.log('The serial port closed.');
+          }
 
-            function portClose() {
-              console.log('The serial port closed.');
-            }
+          // create some HTML elements in the sketch:
+          function createHTML() {
+            serialDiv = createElement('p', 'incoming data goes here');
+            serialDiv.attribute('aria-label', 'incoming data');
+            serialDiv.attribute('aria-role', 'alert');
+            serialDiv.attribute('aria-live', 'polite');
+            serialDiv.style('color', 'white');
+            serialDiv.position(10, 40);
+          }
 
-            // create some HTML elements in the sketch:
-            function createHTML() {
-              serialDiv = createElement('p', 'incoming data goes here');
-              serialDiv.attribute('aria-label', 'incoming data');
-              serialDiv.attribute('aria-role', 'alert');
-              serialDiv.attribute('aria-live', 'polite');
-              serialDiv.style('color', 'white');
-              serialDiv.position(10, 40);
-            }
+          function printData(inString) {
+            // put the input in the serialDiv div:
+            serialDiv.html('log: ' + inString);
+            // print it to the console as well
+           // console.log(inString);
+          }
 
-            function printData(inString) {
-              // put the input in the serialDiv div:
-              serialDiv.html('log: ' + inString);
-              // print it to the console as well
-             // console.log(inString);
-            }
+          </code></pre>
 
-            </code></pre>
+          And here is the code I uploaded to the microcontroller:
 
-            And here is the code I uploaded to the microcontroller:
+          <pre><code class="language-arduino">
 
-            <pre><code class="language-arduino">
+          const int sensorPin = A0;    // analog pin A0
 
-            const int sensorPin = A0;    // analog pin A0
+          void setup() {
+            // initialize the serial port for communication
+            Serial.begin(9600);
+          }
 
-            void setup() {
-              // initialize the serial port for communication
-              Serial.begin(9600);
-            }
-
-            void loop() {
-              // read from potentiometer
-              int sensorValue = analogRead(sensorPin);
-              
-              // write the value to p5.js
-              Serial.write(sensorValue);
-              delay(10);
-            }
-            </code></pre>
+          void loop() {
+            // read from potentiometer
+            int sensorValue = analogRead(sensorPin);
+            
+            // write the value to p5.js
+            Serial.write(sensorValue);
+            delay(10);
+          }
+          </code></pre>
 
 
         <p> I also downloaded and unzipped "p5.serialcontrol" from <a href="https://github.com/p5-serial/p5.serialcontrol/releases/tag/0.1.2">this website</a>. This is a separate program that allows us to create a server. With that done, we are ready to talk to a p5 sketch over Serial. </p>
@@ -214,6 +199,8 @@
           <source src="./1.mp4" type=video/mp4>
           </video>
         </div>        
+
+
 
         <p> Here is the code I uploaded to the microntroller: </p>
 
